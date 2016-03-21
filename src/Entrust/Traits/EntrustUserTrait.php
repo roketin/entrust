@@ -197,7 +197,7 @@ trait EntrustUserTrait
      *
      * @param mixed $role
      */
-    public function attachRole($role)
+    public function attachRole($role, $company_id)
     {
         if (is_object($role)) {
             $role = $role->getKey();
@@ -207,7 +207,7 @@ trait EntrustUserTrait
             $role = $role['id'];
         }
 
-        $this->roles()->attach($role);
+        $this->roles()->attach($role, ['company_id' => $company_id]);
     }
 
     /**
@@ -215,7 +215,7 @@ trait EntrustUserTrait
      *
      * @param mixed $role
      */
-    public function detachRole($role)
+    public function detachRole($role, $company_id)
     {
         if (is_object($role)) {
             $role = $role->getKey();
