@@ -1,4 +1,5 @@
-<?php namespace Zizaco\Entrust\Traits;
+<?php
+namespace Zizaco\Entrust\Traits;
 
 /**
  * This file is part of Entrust,
@@ -19,7 +20,7 @@ trait EntrustRoleTrait
      */
     public function users()
     {
-        return $this->belongsToMany(Config::get('auth.model'), Config::get('entrust.role_user_table'));
+        return $this->belongsToMany(Config::get('auth.model'), Config::get('entrust.role_user_table'))->withPivot('company_id');
     }
 
     /**
@@ -44,7 +45,7 @@ trait EntrustRoleTrait
     {
         parent::boot();
 
-        static::deleting(function($role) {
+        static::deleting(function ($role) {
             if (!method_exists(Config::get('entrust.role'), 'bootSoftDeletingTrait')) {
                 $role->users()->sync([]);
                 $role->perms()->sync([]);
@@ -99,11 +100,13 @@ trait EntrustRoleTrait
      */
     public function detachPermission($permission)
     {
-        if (is_object($permission))
+        if (is_object($permission)) {
             $permission = $permission->getKey();
+        }
 
-        if (is_array($permission))
+        if (is_array($permission)) {
             $permission = $permission['id'];
+        }
 
         $this->perms()->detach($permission);
     }

@@ -1,9 +1,13 @@
 {
-    "name": "zizaco/entrust",
+    "name": "roketin/entrust",
     "description": "This package provides a flexible way to add Role-based Permissions to Laravel",
-    "keywords": ["laravel","illuminate","auth","roles","acl","permission"],
+    "keywords": ["laravel","roketin","entrust","private"],
     "license": "MIT",
     "authors": [
+        {
+            "name": "Ivan Chen",
+            "email": "ivan@roketin.com"
+        },
         {
             "name": "Zizaco Zizuini",
             "email": "zizaco@gmail.com"
